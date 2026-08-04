@@ -2,11 +2,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Block firstBlock = new Block("Hello Blockchain", "0");
+        Blockchain blockchain = new Blockchain();
 
-        System.out.println("Block Data : " + firstBlock.data);
-        System.out.println("Previous Hash : " + firstBlock.previousHash);
-        System.out.println("Current Hash : " + firstBlock.hash);
+        Block genesis = new Block("Genesis Block", "0");
+        blockchain.addBlock(genesis);
+
+        Block second = new Block("Second Block", genesis.hash);
+        blockchain.addBlock(second);
+
+        Block third = new Block("Third Block", second.hash);
+        blockchain.addBlock(third);
+
+        blockchain.chain.get(1).data = "Hacked Block";
+        
+        System.out.println("Is blockchain valid? " + blockchain.isChainValid());
 
     }
+
 }
