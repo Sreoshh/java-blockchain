@@ -21,3 +21,14 @@ All notable changes to this project will be documented in this file.
 - Linked blocks using previous block hashes.
 - Demonstrated blockchain integrity verification and tamper detection.
 
+## [0.2.0] - Wallets & Digital Signatures
+
+### Added
+- Implemented ECDSA digital signature utilities.
+- Added key encoding utility for readable public/private keys.
+- Created `Wallet` class with automatic EC key pair generation.
+- Implemented `Transaction` class.
+- Added transaction signing using the sender's private key.
+- Added signature verification using the sender's public key.
+- Successfully verified valid transactions and detected tampered transactions.
+

@@ -1,4 +1,6 @@
 import java.security.MessageDigest;
+import java.security.*;
+import java.util.Base64;
 
 public class StringUtil {
 
@@ -33,5 +35,54 @@ public class StringUtil {
         }
 
     }
+
+    public static byte[] applyECDSASig(PrivateKey privateKey, String input) {
+
+    try {
+
+        Signature dsa = Signature.getInstance("SHA256withECDSA");
+
+        dsa.initSign(privateKey);
+
+        dsa.update(input.getBytes());
+
+        return dsa.sign();
+
+    } catch (Exception e) {
+
+        throw new RuntimeException(e);
+
+    }
+
+}
+
+public static boolean verifyECDSASig(
+        PublicKey publicKey,
+        String data,
+        byte[] signature) {
+
+    try {
+
+        Signature ecdsaVerify = Signature.getInstance("SHA256withECDSA");
+
+        ecdsaVerify.initVerify(publicKey);
+
+        ecdsaVerify.update(data.getBytes());
+
+        return ecdsaVerify.verify(signature);
+
+    } catch (Exception e) {
+
+        throw new RuntimeException(e);
+
+    }
+
+}
+
+public static String getStringFromKey(Key key) {
+
+    return Base64.getEncoder().encodeToString(key.getEncoded());
+
+}
 
 }

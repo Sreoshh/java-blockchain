@@ -2,20 +2,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Blockchain blockchain = new Blockchain();
+        // Create two wallets
+        Wallet alice = new Wallet();
+        Wallet bob = new Wallet();
 
-        Block genesis = new Block("Genesis Block", "0");
-        blockchain.addBlock(genesis);
+        // Alice sends 50 coins to Bob
+        Transaction transaction = new Transaction(
+                alice.publicKey,
+                bob.publicKey,
+                50f
+        );
 
-        Block second = new Block("Second Block", genesis.hash);
-        blockchain.addBlock(second);
+        // Alice signs the transaction
+        transaction.generateSignature(alice.privateKey);
 
-        Block third = new Block("Third Block", second.hash);
-        blockchain.addBlock(third);
-
-        blockchain.chain.get(1).data = "Hacked Block";
-        
-        System.out.println("Is blockchain valid? " + blockchain.isChainValid());
+        // Verify the signature
+        System.out.println("Signature Valid: " +
+                transaction.verifySignature());
 
     }
 
