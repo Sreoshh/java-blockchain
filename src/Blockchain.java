@@ -1,12 +1,20 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Blockchain {
 
     public ArrayList<Block> chain;
     
+    // Stores all unspent transaction outputs
+    public HashMap<String, TransactionOutput> UTXOs;
+
+    // Minimum transaction amount
+    public float minimumTransaction = 0.1f;
+
     public int difficulty;
     public Blockchain() {
         chain = new ArrayList<>();
+        UTXOs = new HashMap<>();
         difficulty = 4; // Set the mining difficulty
     }
 
