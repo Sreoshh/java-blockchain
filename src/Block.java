@@ -9,6 +9,7 @@ public class Block {
     public long timeStamp;
     public int nonce;
     public ArrayList<Transaction> transactions = new ArrayList<>();
+    public String merkleRoot;
 
     public Block(String data, String previousHash) {
 
@@ -21,12 +22,12 @@ public class Block {
 
     public String calculateHash() {
 
-        String calculatedHash = StringUtil.applySha256( previousHash + Long.toString(timeStamp) +Integer.toString(nonce) + data);
-
+        String calculatedHash = StringUtil.applySha256( previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + merkleRoot);
         return calculatedHash;
     }
 
     public void mineBlock(int difficulty) {
+        merkleRoot = StringUtil.getMerkleRoot(transactions);
 
         String target = new String(new char[difficulty]).replace('\0', '0');
 

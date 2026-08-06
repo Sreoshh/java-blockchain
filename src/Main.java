@@ -49,5 +49,10 @@ public class Main {
 
         System.out.println("Wallet B Balance: " + walletB.getBalance(blockchain));
 
+        System.out.println("\n\n========== BLOCKCHAIN ==========");
+        for (int i = 0; i < blockchain.chain.size(); i++) {
+            BlockExplorer.printBlock(blockchain.chain.get(i), i);
+
+}
     }
 }
