@@ -34,6 +34,42 @@ All notable changes to this project will be documented in this file.
 - Added transaction signing using the sender's private key.
 - Added signature verification using the sender's public key.
 - Successfully verified valid transactions and detected tampered transactions.
-
 <img width="1920" height="1032" alt="Screenshot 2026-08-04 121722" src="https://github.com/user-attachments/assets/59a3f66d-4e1e-44a4-b0a3-f946732e6f64" />
+
+
+## [0.3.0] - Cryptocurrency Transactions & UTXO Model
+
+### Added
+- Implemented `TransactionInput` and `TransactionOutput` classes.
+- Introduced the UTXO (Unspent Transaction Output) model for tracking spendable coins.
+- Added global UTXO management to the blockchain.
+- Enhanced `Wallet` to:
+  - Calculate wallet balance.
+  - Collect UTXOs for transactions.
+  - Create and sign transactions.
+- Enhanced `Transaction` to:
+  - Process transactions.
+  - Validate digital signatures.
+  - Generate unique transaction IDs.
+  - Create new transaction outputs.
+  - Return change to the sender.
+  - Update the global UTXO set.
+- Updated `Block` to store and process transactions.
+- Implemented the Genesis Transaction.
+- Enabled secure coin transfers between wallets.
+- Successfully demonstrated wallet balance updates after transactions.
+
+What just happened?
+- Genesis Transaction
+- Instead of magically giving Wallet A money, we created the very first transaction:
+- Coinbase -> Wallet A
+- 100 Coins
+- Wallet A Sends 40
+- Wallet A owns 100 Coins
+- She sends 40 Coins
+- The blockchain creates Wallet B = 40 Coins
+- and Wallet A = 60 Coins (Change)
+- Notice that Wallet A's original 100-coin output no longer exists. It has been spent and replaced with two new outputs.
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/e9b2cb4a-a1a4-4c61-8a28-b3d0938ba851" />
+
 
