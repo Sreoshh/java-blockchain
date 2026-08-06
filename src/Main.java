@@ -1,25 +1,53 @@
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        // Create two wallets
-        Wallet alice = new Wallet();
-        Wallet bob = new Wallet();
+        Blockchain blockchain = new Blockchain();
 
-        // Alice sends 50 coins to Bob
-        Transaction transaction = new Transaction(
-                alice.publicKey,
-                bob.publicKey,
-                50f
-        );
+        Wallet coinbase = new Wallet();
+        Wallet walletA = new Wallet();
+        Wallet walletB = new Wallet();
 
-        // Alice signs the transaction
-        transaction.generateSignature(alice.privateKey);
+        // Genesis Transaction
+        Transaction genesisTransaction = new Transaction( coinbase.publicKey, walletA.publicKey,100f, new ArrayList<>());
 
-        // Verify the signature
-        System.out.println("Signature Valid: " +
-                transaction.verifySignature());
+        genesisTransaction.generateSignature(coinbase.privateKey);
+
+        genesisTransaction.transactionId = "0";
+
+        genesisTransaction.outputs.add( new TransactionOutput( genesisTransaction.recipient, genesisTransaction.value, genesisTransaction.transactionId));
+
+        blockchain.UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
+
+        System.out.println("Creating Genesis Block...");
+
+        Block genesis = new Block("Genesis Block", "0");
+        genesis.addTransaction(genesisTransaction, blockchain);
+        blockchain.addBlock(genesis);
+
+        System.out.println();
+
+        System.out.println("Wallet A Balance: " + walletA.getBalance(blockchain));
+
+        System.out.println("Wallet B Balance: " + walletB.getBalance(blockchain));
+
+        System.out.println();
+
+        System.out.println("Wallet A is Sending 40 coins to Wallet B...");
+
+        Block block1 = new Block("Block 1", genesis.hash);
+
+        block1.addTransaction(walletA.sendFunds(blockchain, walletB.publicKey,40f), blockchain);
+
+        blockchain.addBlock(block1);
+
+        System.out.println();
+
+        System.out.println("Wallet A Balance: " + walletA.getBalance(blockchain));
+
+        System.out.println("Wallet B Balance: " + walletB.getBalance(blockchain));
 
     }
-
 }

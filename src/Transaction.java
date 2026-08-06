@@ -98,4 +98,60 @@ public class Transaction {
 
     }
 
+    public boolean processTransaction(Blockchain blockchain) {
+
+    // Verify the signature
+    if (!verifySignature()) {
+
+        System.out.println("Transaction Signature failed to verify.");
+        return false;
+
+    }
+
+    // Gather transaction inputs
+    for (TransactionInput input : inputs) {
+
+        input.UTXO = blockchain.UTXOs.get(input.transactionOutputId);
+
+    }
+
+    // Check minimum transaction amount
+    if (getInputsValue() < blockchain.minimumTransaction) {
+
+        System.out.println("Transaction Inputs too small.");
+        return false;
+
+    }
+
+    // Calculate remaining balance
+    float leftOver = getInputsValue() - value;
+
+    transactionId = calculateHash();
+
+    // Create outputs
+    outputs.add(new TransactionOutput(recipient, value, transactionId));
+
+    outputs.add(new TransactionOutput( sender, leftOver, transactionId));
+
+    // Add outputs to global UTXO list
+    for (TransactionOutput output : outputs) {
+
+        blockchain.UTXOs.put(output.id, output);
+
+    }
+
+    // Remove spent inputs
+    for (TransactionInput input : inputs) {
+
+        if (input.UTXO == null)
+            continue;
+
+        blockchain.UTXOs.remove(input.UTXO.id);
+
+    }
+
+    return true;
+
+}
+
 }
