@@ -72,4 +72,18 @@ What just happened?
 - Notice that Wallet A's original 100-coin output no longer exists. It has been spent and replaced with two new outputs.
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/e9b2cb4a-a1a4-4c61-8a28-b3d0938ba851" />
 
+## [0.4.0] - Merkle Tree & Blockchain Explorer
 
+### Added
+- Implemented Merkle Tree generation for block transactions.
+- Updated block hashing to use the Merkle Root instead of raw block data.
+- Added Merkle Root calculation before block mining.
+- Created a console based Blockchain Explorer to display:
+  - Block hash
+  - Previous hash
+  - Merkle Root
+  - Nonce
+  - Timestamp
+  - Transaction details
+- Improved blockchain visualization and debugging.
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/220b1e92-e7ca-41fa-af20-9f335c80969a" />
