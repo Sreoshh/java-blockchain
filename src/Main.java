@@ -9,6 +9,7 @@ public class Main {
         Wallet coinbase = new Wallet();
         Wallet walletA = new Wallet();
         Wallet walletB = new Wallet();
+        Wallet miner = new Wallet();
 
         // Genesis Transaction
         Transaction genesisTransaction = new Transaction( coinbase.publicKey, walletA.publicKey,100f, new ArrayList<>());
@@ -52,7 +53,18 @@ public class Main {
         System.out.println("\n\n========== BLOCKCHAIN ==========");
         for (int i = 0; i < blockchain.chain.size(); i++) {
             BlockExplorer.printBlock(blockchain.chain.get(i), i);
-
 }
+        Blockchain loadedBlockchain = BlockchainStorage.load();
+
+        if (loadedBlockchain != null) {
+        System.out.println("Loaded blocks: " + loadedBlockchain.chain.size());
+}
+        Transaction reward = blockchain.createMiningReward(miner);
+
+        System.out.println("Mining Reward: " + reward.value);
+        Block block1 = new Block("Block 1", genesis.hash);
+        block1.addTransaction(walletA.sendFunds(blockchain, walletB.publicKey, 40f), blockchain);
+        blockchain.addBlock(block1, miner);
+        System.out.println("Miner Balance: " + miner.getBalance(blockchain));
     }
 }

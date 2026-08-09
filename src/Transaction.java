@@ -112,8 +112,15 @@ public class Transaction {
     for (TransactionInput input : inputs) {
 
         input.UTXO = blockchain.UTXOs.get(input.transactionOutputId);
+        if (input.UTXO == null) {
 
+        System.out.println(
+                "Transaction contains a spent or invalid UTXO."
+        );
+
+        return false;
     }
+}
 
     // Check minimum transaction amount
     if (getInputsValue() < blockchain.minimumTransaction) {
