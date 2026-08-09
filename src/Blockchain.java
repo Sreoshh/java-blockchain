@@ -50,6 +50,51 @@ public class Blockchain {
                 return false;
 
             }
+            // Verify Merkle Root
+            String recalculatedMerkle =
+            StringUtil.getMerkleRoot(currentBlock.transactions);
+            if (!recalculatedMerkle.equals(currentBlock.merkleRoot)) {
+                System.out.println("Merkle Root is invalid!");
+                return false;
+            }
+            // Validate every transaction in the block
+for (Transaction transaction : currentBlock.transactions) {
+
+    // Verify transaction signature
+    if (!transaction.verifySignature()) {
+
+        System.out.println("Transaction signature is invalid!");
+        return false;
+
+    }
+
+    // Check transaction inputs and outputs
+    if (!transaction.inputs.isEmpty()) {
+
+        float inputValue = transaction.getInputsValue();
+        float outputValue = transaction.getOutputsValue();
+
+        // Outputs must not exceed inputs
+        if (outputValue > inputValue) {
+
+            System.out.println("Transaction outputs exceed inputs!");
+            return false;
+
+        }
+
+        // Every input must reference a valid UTXO
+        for (TransactionInput input : transaction.inputs) {
+
+            if (input.UTXO == null) {
+
+                System.out.println("Invalid transaction input!");
+                return false;
+
+            }
+
+        }
+    }
+}
 
         }
 
