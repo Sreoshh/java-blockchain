@@ -20,7 +20,7 @@ public class Main {
 
         genesisTransaction.outputs.add( new TransactionOutput( genesisTransaction.recipient, genesisTransaction.value, genesisTransaction.transactionId));
 
-        UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
+        blockchain.UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
 
         System.out.println("Creating Genesis Block...");
 

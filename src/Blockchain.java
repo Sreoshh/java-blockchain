@@ -58,7 +58,7 @@ public class Blockchain {
 
     reward.outputs.add(new TransactionOutput(miner.publicKey, miningReward, reward.transactionId));
 
-    blockchain.UTXOs.put(reward.outputs.get(0).id, reward.outputs.get(0));
+    UTXOs.put(reward.outputs.get(0).id, reward.outputs.get(0));
     return reward;
 }
 
