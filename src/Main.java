@@ -20,13 +20,13 @@ public class Main {
 
         genesisTransaction.outputs.add( new TransactionOutput( genesisTransaction.recipient, genesisTransaction.value, genesisTransaction.transactionId));
 
-        blockchain.UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
+        UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
 
         System.out.println("Creating Genesis Block...");
 
         Block genesis = new Block("Genesis Block", "0");
         genesis.addTransaction(genesisTransaction, blockchain);
-        blockchain.addBlock(genesis);
+        blockchain.addBlock(genesis, coinbase);
 
         System.out.println();
 
@@ -42,7 +42,7 @@ public class Main {
 
         block1.addTransaction(walletA.sendFunds(blockchain, walletB.publicKey,40f), blockchain);
 
-        blockchain.addBlock(block1);
+        blockchain.addBlock(block1, miner);
 
         System.out.println();
 
@@ -62,9 +62,6 @@ public class Main {
         Transaction reward = blockchain.createMiningReward(miner);
 
         System.out.println("Mining Reward: " + reward.value);
-        Block block1 = new Block("Block 1", genesis.hash);
-        block1.addTransaction(walletA.sendFunds(blockchain, walletB.publicKey, 40f), blockchain);
-        blockchain.addBlock(block1, miner);
         System.out.println("Miner Balance: " + miner.getBalance(blockchain));
     }
 }

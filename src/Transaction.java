@@ -131,6 +131,17 @@ public class Transaction {
     }
 
     // Calculate remaining balance
+
+    if (value <= 0) {
+    System.out.println("Transaction value must be greater than zero.");
+    return false;
+}
+
+    if (value > getInputsValue()) {
+    System.out.println("Transaction value exceeds available funds.");
+    return false;
+}
+
     float leftOver = getInputsValue() - value;
 
     transactionId = calculateHash();
