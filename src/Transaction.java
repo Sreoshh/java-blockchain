@@ -1,6 +1,7 @@
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.security.Signature;
 
 public class Transaction {
 
@@ -92,11 +93,21 @@ public class Transaction {
     // Verify the signature
     public boolean verifySignature() {
 
-        String data = getData();
-
-        return StringUtil.verifyECDSASig( sender, data, signature);
-
+    if (sender == null) {
+        return true;
     }
+
+    try {
+        Signature ecdsaVerify = Signature.getInstance("ECDSA", "BC");
+        ecdsaVerify.initVerify(sender);
+        ecdsaVerify.update(getData().getBytes());
+
+        return ecdsaVerify.verify(signature);
+
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+}
 
     public boolean processTransaction(Blockchain blockchain) {
 

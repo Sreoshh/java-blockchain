@@ -43,6 +43,11 @@ public class Block {
     if (transaction == null)
         return false;
 
+     if (transaction.sender == null) {
+        transactions.add(transaction);
+        return true;
+    }
+
     if (!previousHash.equals("0")) {
 
         if (!transaction.processTransaction(blockchain)) {
