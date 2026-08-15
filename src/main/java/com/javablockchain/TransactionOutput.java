@@ -1,3 +1,4 @@
+package com.javablockchain;
 import java.security.PublicKey;
 
 public class TransactionOutput {

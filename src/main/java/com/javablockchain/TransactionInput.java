@@ -1,3 +1,4 @@
+package com.javablockchain;
 public class TransactionInput {
 
     // Reference to a previous TransactionOutput

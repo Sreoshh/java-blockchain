@@ -1,3 +1,4 @@
+package com.javablockchain;
 public class BlockExplorer {
 
     public static void printBlock(Block block, int index) {

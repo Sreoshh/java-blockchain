@@ -1,3 +1,4 @@
+package com.javablockchain;
 import com.google.gson.GsonBuilder;
 
 import java.io.FileReader;
