@@ -8,4 +8,5 @@ com\javablockchain\Transaction.class
 com\javablockchain\TransactionOutput.class
 com\javablockchain\Wallet.class
 com\javablockchain\BlockchainStorage.class
+com\javablockchain\BlockchainController.class
 com\javablockchain\Application.class

@@ -87,3 +87,9 @@ What just happened?
   - Transaction details
 - Improved blockchain visualization and debugging.
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/220b1e92-e7ca-41fa-af20-9f335c80969a" />
+
+### Added
+- Migrated the project to a standard Maven/Spring Boot directory structure.
+- Added `com.javablockchain` package structure across Java classes.
+- Added Spring Boot application entry point.
+- Verified successful Maven compilation and Spring Boot startup on port 8080.
