@@ -93,3 +93,18 @@ What just happened?
 - Added `com.javablockchain` package structure across Java classes.
 - Added Spring Boot application entry point.
 - Verified successful Maven compilation and Spring Boot startup on port 8080.
+
+### Added
+- Integrated Spring Boot into the blockchain project.
+- Added `Application.java` as the Spring Boot entry point.
+- Added `BlockchainController` for REST API access.
+- Added blockchain status, validation, and blockchain retrieval endpoints.
+- Added a mining endpoint to create and mine new blocks.
+- Added a persistent miner wallet for mining rewards.
+
+### Verified
+- `mvn clean compile` succeeds.
+- Spring Boot application starts successfully.
+- Mining endpoint successfully creates a block.
+- Blockchain status endpoint reflects the new block.
+- Blockchain validation returns `true`.
