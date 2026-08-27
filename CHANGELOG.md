@@ -103,8 +103,14 @@ What just happened?
 - Added a persistent miner wallet for mining rewards.
 
 ### Verified
-- `mvn clean compile` succeeds.
 - Spring Boot application starts successfully.
 - Mining endpoint successfully creates a block.
 - Blockchain status endpoint reflects the new block.
 - Blockchain validation returns `true`.
+<img width="1049" height="586" alt="Screenshot 2026-08-27 100529" src="https://github.com/user-attachments/assets/6a433c2d-6cbb-4ef0-b3fc-f5dbedb6fe14" />
+Useful endpoints for reference:
+
+- GET  /api/blockchain
+- GET  /api/blockchain/validate
+- GET  /api/blockchain/status
+- POST /mine
