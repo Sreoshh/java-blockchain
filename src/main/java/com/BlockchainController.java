@@ -2,7 +2,9 @@ package com.javablockchain;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
 
 @RestController
 public class BlockchainController {
@@ -12,7 +14,14 @@ public class BlockchainController {
 
     public BlockchainController() {
         blockchain = new Blockchain();
-    }
+        Transaction genesisTransaction = new Transaction( null,miner.publicKey,100f,new ArrayList<>());
+        genesisTransaction.transactionId = "GENESIS";
+        
+        genesisTransaction.outputs.add(new TransactionOutput(miner.publicKey, 100f, genesisTransaction.transactionId));
+    
+    blockchain.UTXOs.put(genesisTransaction.outputs.get(0).id, genesisTransaction.outputs.get(0));
+}
+    
 
     @GetMapping("/")
     public String home() {
@@ -42,5 +51,20 @@ public class BlockchainController {
     blockchain.addBlock(newBlock, miner);
 
     return "Block mined successfully. Hash: " + newBlock.hash;
+}
+
+    @PostMapping("/transaction")
+    public String createTransaction(
+        @RequestParam float amount) {
+
+    Wallet recipient = new Wallet();
+
+    Transaction transaction = miner.sendFunds(blockchain, recipient.publicKey, amount);
+
+    if (transaction == null) {
+        return "Transaction failed.";
+    }
+
+    return "Transaction created successfully.";
 }
 }
