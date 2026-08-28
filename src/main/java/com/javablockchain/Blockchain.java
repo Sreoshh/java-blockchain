@@ -11,14 +11,16 @@ public class Blockchain {
 
     // Minimum transaction amount
     public float minimumTransaction = 0.1f;
-    public Blockchain() {
-        chain = new ArrayList<>();
-        UTXOs = new HashMap<>();
-    }
     public int difficulty = 4;
     public long targetBlockTime = 5000;
     public int adjustmentInterval = 3;
+    public ArrayList<Transaction> pendingTransactions;
 
+    public Blockchain() {
+    chain = new ArrayList<>();
+    UTXOs = new HashMap<>();
+    pendingTransactions = new ArrayList<>();
+}
 
     public void adjustDifficulty() {
 
@@ -65,6 +67,10 @@ public class Blockchain {
 
     public void addBlock(Block newBlock, Wallet miner) {
 
+        // Add all pending transactions to the block
+    for (Transaction transaction : pendingTransactions) {
+        newBlock.addTransaction(transaction, this);
+    }
     Transaction reward = createMiningReward(miner);
 
     newBlock.addTransaction(reward, this);
@@ -72,6 +78,9 @@ public class Blockchain {
     newBlock.mineBlock(difficulty);
 
     chain.add(newBlock);
+
+    // Clear transactions that were successfully mined
+    pendingTransactions.clear();
 
     adjustDifficulty();
 }
@@ -111,67 +120,55 @@ public class Blockchain {
                 return false;
             }
             // Validate every transaction in the block
-for (Transaction transaction : currentBlock.transactions) {
-
-    // Verify transaction signature
-    if (transaction.sender != null) {
-    if (!transaction.verifySignature()) {
-
-        System.out.println("Transaction signature is invalid!");
-        return false;
-
-    }
-    if (transaction.sender == null) {
-
-    if (transaction.value != miningReward) {
-
-        System.out.println("Invalid mining reward!");
-        return false;
-
-    }
-
-    if (transaction.inputs != null &&
-            !transaction.inputs.isEmpty()) {
-
-        System.out.println("Mining reward cannot have inputs!");
-        return false;
-
-    }
-}
-    }
-
-    // Check transaction inputs and outputs
-    if (!transaction.inputs.isEmpty()) {
-
-        float inputValue = transaction.getInputsValue();
-        float outputValue = transaction.getOutputsValue();
-
-        // Outputs must not exceed inputs
-        if (outputValue > inputValue) {
-
-            System.out.println("Transaction outputs exceed inputs!");
-            return false;
-
-        }
-
-        // Every input must reference a valid UTXO
-        for (TransactionInput input : transaction.inputs) {
-
-            if (input.UTXO == null) {
-
-                System.out.println("Invalid transaction input!");
-                return false;
-
+            for (Transaction transaction : currentBlock.transactions) {
+                
+                // Verify transaction signature
+                if (transaction.sender != null) {
+                    if (!transaction.verifySignature()) {
+                        System.out.println("Transaction signature is invalid!");
+                        return false;
+                        }
+                        if (transaction.sender == null) {
+                            
+                            if (transaction.value != miningReward) {
+                                System.out.println("Invalid mining reward!");
+                                return false;
+                                 }
+                                 
+                                 if (transaction.inputs != null &&!transaction.inputs.isEmpty()) {
+                                    System.out.println("Mining reward cannot have inputs!");
+                                     return false;
+                                 }
+                                 }
+                                 }
+                                 // Check transaction inputs and outputs
+                                 if (!transaction.inputs.isEmpty()) {
+                                    
+                                    float inputValue = transaction.getInputsValue();
+                                    float outputValue = transaction.getOutputsValue();
+                                    
+                                    // Outputs must not exceed inputs
+                                    if (outputValue > inputValue) {
+                                        System.out.println("Transaction outputs exceed inputs!");
+                                        return false;
+                                    }
+                                    
+                                    // Every input must reference a valid UTXO
+                                    for (TransactionInput input : transaction.inputs) {
+                                        
+                                         if (input.UTXO == null) {
+                                            System.out.println("Invalid transaction input!");
+                                            return false;
+                                        }
+                                    }
+                                }
+                                
             }
-
         }
-    }
-}
-
-        }
-
         return true;
-
     }
-
 }
+
+
+
+    

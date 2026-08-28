@@ -114,3 +114,17 @@ Useful endpoints for reference:
 - GET  /api/blockchain/validate
 - GET  /api/blockchain/status
 - POST /mine
+
+### Added
+- Added UTXO-based transaction handling.
+- Added wallet fund-transfer functionality with digital signatures.
+- Added mining reward transactions.
+- Added transaction processing and validation.
+- Added transaction input/output validation.
+- Added blockchain difficulty adjustment based on mining time.
+- Added REST endpoints for blockchain status, validation, mining, and transactions.
+### Changed
+- Updated blockchain validation to verify transaction signatures and Merkle roots.
+- Updated block mining to include mining reward transactions.
+- Updated UTXO management when transactions are processed.
+- Updated blockchain controller to support transaction creation and mining.

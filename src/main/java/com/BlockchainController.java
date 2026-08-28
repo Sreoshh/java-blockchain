@@ -11,6 +11,7 @@ public class BlockchainController {
 
     private final Blockchain blockchain;
     private final Wallet miner = new Wallet();
+    private final Wallet recipient = new Wallet();
 
     public BlockchainController() {
         blockchain = new Blockchain();
@@ -54,17 +55,31 @@ public class BlockchainController {
 }
 
     @PostMapping("/transaction")
-    public String createTransaction(
-        @RequestParam float amount) {
-
-    Wallet recipient = new Wallet();
+    public String createTransaction(@RequestParam ("amount")float amount) {
 
     Transaction transaction = miner.sendFunds(blockchain, recipient.publicKey, amount);
 
     if (transaction == null) {
         return "Transaction failed.";
     }
-
+    blockchain.pendingTransactions.add(transaction);
     return "Transaction created successfully.";
+}
+
+    @GetMapping("/transactions")
+    public ArrayList<Transaction> getTransactions() {
+
+    ArrayList<Transaction> transactions = new ArrayList<>();
+
+    for (Block block : blockchain.chain) {
+        transactions.addAll(block.transactions);
+    }
+
+    return transactions;
+}
+
+    @GetMapping("/balance")
+    public float getMinerBalance() {
+    return miner.getBalance(blockchain);
 }
 }
