@@ -120,14 +120,19 @@ Useful endpoints for reference:
 - Added wallet fund-transfer functionality with digital signatures.
 - Added mining reward transactions.
 - Added transaction processing and validation.
+<img width="1252" height="723" alt="Screenshot 2026-08-28 205921" src="https://github.com/user-attachments/assets/cd0f2d11-6b2a-442e-b12a-61e4f5088ee3" />
+
 - Added transaction input/output validation.
 - Added blockchain difficulty adjustment based on mining time.
 - Added REST endpoints for blockchain status, validation, mining, and transactions.
+<img width="1306" height="754" alt="Screenshot 2026-08-28 210223" src="https://github.com/user-attachments/assets/9bcc032f-96bd-4ff5-b9c8-84cf29170112" />
+
 ### Changed
 - Updated blockchain validation to verify transaction signatures and Merkle roots.
 - Updated block mining to include mining reward transactions.
 - Updated UTXO management when transactions are processed.
 - Updated blockchain controller to support transaction creation and mining.
+<<<<<<< HEAD
 
 ### Added
 - Added blockchain persistence using blockchain.json.
@@ -139,3 +144,5 @@ Useful endpoints for reference:
 - Updated mining and transaction operations to save blockchain state.
 - Updated storage loading to restore missing collections safely.
 - Updated miner wallet initialization to reuse its saved key pair.
+=======
+>>>>>>> 9b90fb97c30724e27c2ebbd22ecfaee078f8b434
