@@ -128,3 +128,14 @@ Useful endpoints for reference:
 - Updated block mining to include mining reward transactions.
 - Updated UTXO management when transactions are processed.
 - Updated blockchain controller to support transaction creation and mining.
+
+### Added
+- Added blockchain persistence using blockchain.json.
+- Added wallet key persistence using wallet.json.
+- Added pending transaction persistence.
+- Added wallet loading and saving across application restarts.
+### Changed
+- Updated blockchain initialization to load existing saved data.
+- Updated mining and transaction operations to save blockchain state.
+- Updated storage loading to restore missing collections safely.
+- Updated miner wallet initialization to reuse its saved key pair.

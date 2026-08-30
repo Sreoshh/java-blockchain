@@ -83,6 +83,7 @@ public class Blockchain {
     pendingTransactions.clear();
 
     adjustDifficulty();
+    BlockchainStorage.save(this);
 }
 
     // Checks whether the blockchain has been tampered with

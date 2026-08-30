@@ -10,13 +10,25 @@ import java.util.ArrayList;
 public class BlockchainController {
 
     private final Blockchain blockchain;
-    private final Wallet miner = new Wallet();
+    private final Wallet miner;
     private final Wallet recipient = new Wallet();
 
     public BlockchainController() {
-        blockchain = new Blockchain();
-        Transaction genesisTransaction = new Transaction( null,miner.publicKey,100f,new ArrayList<>());
-        genesisTransaction.transactionId = "GENESIS";
+        Wallet loadedMiner = WalletStorage.load();
+        if (loadedMiner != null) {
+    miner = loadedMiner;
+    } else {
+    miner = new Wallet();
+    WalletStorage.save(miner);
+}
+        Blockchain loadedBlockchain = BlockchainStorage.load();
+        if (loadedBlockchain != null) {
+            blockchain = loadedBlockchain;
+            } else {
+            blockchain = new Blockchain();
+            }
+            Transaction genesisTransaction = new Transaction( null,miner.publicKey,100f,new ArrayList<>());
+            genesisTransaction.transactionId = "GENESIS";
         
         genesisTransaction.outputs.add(new TransactionOutput(miner.publicKey, 100f, genesisTransaction.transactionId));
     
@@ -50,6 +62,7 @@ public class BlockchainController {
     Block newBlock = new Block( blockchain.chain.isEmpty()? "0": blockchain.chain.get(blockchain.chain.size() - 1).hash, "Mined Block");
 
     blockchain.addBlock(newBlock, miner);
+    BlockchainStorage.save(blockchain);
 
     return "Block mined successfully. Hash: " + newBlock.hash;
 }
@@ -76,6 +89,10 @@ public class BlockchainController {
     }
 
     return transactions;
+}
+    @GetMapping("/pending-transactions")
+    public ArrayList<Transaction> getPendingTransactions() {
+    return blockchain.pendingTransactions;
 }
 
     @GetMapping("/balance")

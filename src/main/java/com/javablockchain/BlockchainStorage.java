@@ -53,6 +53,10 @@ public class BlockchainStorage {
                         new java.util.HashMap<>();
             }
 
+            if (blockchain.pendingTransactions == null) {
+                blockchain.pendingTransactions = new java.util.ArrayList<>();
+}
+
             if (!blockchain.isChainValid()) {
                 System.out.println("Loaded blockchain is invalid!");
                 return null;

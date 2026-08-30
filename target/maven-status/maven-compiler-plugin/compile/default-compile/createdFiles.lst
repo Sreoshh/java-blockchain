@@ -1,12 +1,14 @@
 com\javablockchain\BlockExplorer.class
 com\javablockchain\Main.class
-com\javablockchain\Block.class
-com\javablockchain\TransactionInput.class
 com\javablockchain\Blockchain.class
 com\javablockchain\StringUtil.class
 com\javablockchain\Transaction.class
 com\javablockchain\TransactionOutput.class
-com\javablockchain\Wallet.class
 com\javablockchain\BlockchainStorage.class
+com\javablockchain\WalletStorage$WalletData.class
+com\javablockchain\Block.class
+com\javablockchain\TransactionInput.class
+com\javablockchain\Wallet.class
 com\javablockchain\BlockchainController.class
 com\javablockchain\Application.class
+com\javablockchain\WalletStorage.class
