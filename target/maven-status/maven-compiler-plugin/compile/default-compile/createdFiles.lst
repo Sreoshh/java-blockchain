@@ -1,5 +1,6 @@
 com\javablockchain\BlockExplorer.class
 com\javablockchain\Main.class
+com\javablockchain\WalletStorage$1.class
 com\javablockchain\Blockchain.class
 com\javablockchain\StringUtil.class
 com\javablockchain\Transaction.class

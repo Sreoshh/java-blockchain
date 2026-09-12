@@ -11,6 +11,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 
 public class WalletStorage {
 
@@ -90,4 +91,86 @@ public class WalletStorage {
         String publicKey;
         String privateKey;
     }
+
+    public static void saveWallets(ArrayList<Wallet> wallets) {
+
+    try (FileWriter writer = new FileWriter("wallets.json")) {
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        ArrayList<WalletData> dataList = new ArrayList<>();
+
+        for (Wallet wallet : wallets) {
+
+            WalletData data = new WalletData();
+
+            data.publicKey = Base64.getEncoder()
+                    .encodeToString(wallet.publicKey.getEncoded());
+
+            data.privateKey = Base64.getEncoder()
+                    .encodeToString(wallet.privateKey.getEncoded());
+
+            dataList.add(data);
+        }
+
+        gson.toJson(dataList, writer);
+
+    } catch (Exception e) {
+        throw new RuntimeException("Error saving wallets.", e);
+    }
+}
+
+    public static ArrayList<Wallet> loadWallets() {
+
+    ArrayList<Wallet> wallets = new ArrayList<>();
+
+    try {
+
+        File file = new File("wallets.json");
+
+        if (!file.exists()) {
+            return wallets;
+        }
+
+        Gson gson = new Gson();
+
+        ArrayList<WalletData> dataList =
+                gson.fromJson(
+                        new FileReader(file),
+                        new com.google.gson.reflect.TypeToken<ArrayList<WalletData>>(){}.getType()
+                );
+
+        if (dataList == null) {
+            return wallets;
+        }
+
+        KeyFactory keyFactory = KeyFactory.getInstance("EC");
+
+        for (WalletData data : dataList) {
+
+            Wallet wallet = new Wallet();
+
+            wallet.publicKey = keyFactory.generatePublic(
+                    new X509EncodedKeySpec(
+                            Base64.getDecoder().decode(data.publicKey)
+                    )
+            );
+
+            wallet.privateKey = keyFactory.generatePrivate(
+                    new PKCS8EncodedKeySpec(
+                            Base64.getDecoder().decode(data.privateKey)
+                    )
+            );
+
+            wallets.add(wallet);
+        }
+
+        return wallets;
+
+    } catch (Exception e) {
+        throw new RuntimeException("Error loading wallets.", e);
+    }
+}
 }
