@@ -132,7 +132,6 @@ Useful endpoints for reference:
 - Updated block mining to include mining reward transactions.
 - Updated UTXO management when transactions are processed.
 - Updated blockchain controller to support transaction creation and mining.
-<<<<<<< HEAD
 
 ### Added
 - Added blockchain persistence using blockchain.json.
@@ -144,5 +143,16 @@ Useful endpoints for reference:
 - Updated mining and transaction operations to save blockchain state.
 - Updated storage loading to restore missing collections safely.
 - Updated miner wallet initialization to reuse its saved key pair.
-=======
->>>>>>> 9b90fb97c30724e27c2ebbd22ecfaee078f8b434
+
+
+## [0.5.0] — Multi-Wallet Management
+### Added
+- Persistent wallet registry for managing multiple wallets.
+- Wallet creation endpoint: POST /wallet/create.
+- Wallet listing endpoint: GET /wallets.
+- Wallet address endpoint: GET /wallet/address.
+- Support for sending transactions to registered wallet addresses.
+- Persistent storage of multiple wallet key pairs.
+### Changed
+- Updated transaction API to resolve recipients from the wallet registry.
+- Updated wallet management to preserve wallets across application restarts.
