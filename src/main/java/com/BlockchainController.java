@@ -148,4 +148,77 @@ public class BlockchainController {
     }
     return addresses;
 }
+
+    @GetMapping("/wallet/balance")
+    public String getWalletBalance(@RequestParam("address") String address) {
+    for (Wallet wallet : wallets) {
+        if (StringUtil.getStringFromKey(wallet.publicKey).equals(address)) {
+            return String.valueOf(wallet.getBalance(blockchain));
+        }
+    }
+
+    return "Wallet not found.";
+}
+
+    @GetMapping("/wallet/transactions")
+public ArrayList<Transaction> getWalletTransactions(
+        @RequestParam("address") String address) {
+
+    ArrayList<Transaction> result = new ArrayList<>();
+
+    for (Block block : blockchain.chain) {
+        for (Transaction transaction : block.transactions) {
+
+            String sender = transaction.sender == null
+                    ? ""
+                    : StringUtil.getStringFromKey(transaction.sender);
+
+            String recipient = transaction.recipient == null
+                    ? ""
+                    : StringUtil.getStringFromKey(transaction.recipient);
+
+            if (sender.equals(address) || recipient.equals(address)) {
+                result.add(transaction);
+            }
+        }
+    }
+
+    return result;
+}
+
+    @GetMapping("/wallet/summary")
+public String getWalletSummary(@RequestParam("address") String address) {
+
+    for (Wallet wallet : wallets) {
+        if (StringUtil.getStringFromKey(wallet.publicKey).equals(address)) {
+
+            float balance = wallet.getBalance(blockchain);
+
+            int transactionCount = 0;
+
+            for (Block block : blockchain.chain) {
+                for (Transaction transaction : block.transactions) {
+
+                    String sender = transaction.sender == null
+                            ? ""
+                            : StringUtil.getStringFromKey(transaction.sender);
+
+                    String recipient = transaction.recipient == null
+                            ? ""
+                            : StringUtil.getStringFromKey(transaction.recipient);
+
+                    if (sender.equals(address) || recipient.equals(address)) {
+                        transactionCount++;
+                    }
+                }
+            }
+
+            return "Wallet Address: " + address
+                    + "\nBalance: " + balance
+                    + "\nTransactions: " + transactionCount;
+        }
+    }
+
+    return "Wallet not found.";
+}
 }

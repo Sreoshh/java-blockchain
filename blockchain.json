@@ -1,0 +1,11 @@
+{
+  "chain": [
+    {
+      "hash": "00004d90e8358aa3df52aad8dd3ba303ca0a6daa67cf52ce45f3da7228431656",
+      "previousHash": "Mined Block",
+      "data": "0",
+      "timeStamp": 1789222585644,
+      "nonce": 62501,
+      "transactions": [
+        {
+          "transactionId": "REWARD-1789222585645"

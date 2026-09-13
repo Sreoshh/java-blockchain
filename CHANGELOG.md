@@ -156,3 +156,11 @@ Useful endpoints for reference:
 ### Changed
 - Updated transaction API to resolve recipients from the wallet registry.
 - Updated wallet management to preserve wallets across application restarts.
+
+## [v0.6.0] — Wallet APIs
+### Added
+- Wallet balance lookup by address.
+- Wallet transaction history endpoint.
+- Wallet summary endpoint showing address, balance, and transaction count.
+### Changed
+- Extended REST API to provide wallet-specific information.
