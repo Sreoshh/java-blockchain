@@ -168,6 +168,13 @@ Useful endpoints for reference:
 ### Added
 - Block lookup API by block index.
 - Public key serialization for blockchain API responses.
+<img width="1382" height="854" alt="Screenshot 2026-09-16 230823" src="https://github.com/user-attachments/assets/8a30e734-f79e-4c3d-a0ed-063fe6f747a1" />
+
+### Block getting mined successfully 
+
+<img width="1423" height="899" alt="Screenshot 2026-09-16 230800" src="https://github.com/user-attachments/assets/2eb5d1f0-148a-43a5-926f-0ad7af87d54c" />
+
+
 ### Changed
 - Fixed /block endpoint JSON serialization.
 - Improved blockchain persistence compatibility with EC public keys.
