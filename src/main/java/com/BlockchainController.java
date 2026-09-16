@@ -9,6 +9,9 @@ import java.security.PublicKey;
 import java.security.KeyFactory;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
 
 @RestController
 public class BlockchainController {
@@ -220,5 +223,23 @@ public String getWalletSummary(@RequestParam("address") String address) {
     }
 
     return "Wallet not found.";
+}
+
+     @GetMapping("/block")
+public String getBlock(@RequestParam("index") int index) {
+
+    if (index < 0 || index >= blockchain.chain.size()) {
+        return "Block not found.";
+    }
+
+    GsonBuilder builder = new GsonBuilder()
+            .setPrettyPrinting()
+            .registerTypeHierarchyAdapter(PublicKey.class,
+                    (JsonSerializer<PublicKey>) (src, type, context) ->
+                            new JsonPrimitive(
+                                    Base64.getEncoder().encodeToString(src.getEncoded())
+                            ));
+
+    return builder.create().toJson(blockchain.chain.get(index));
 }
 }

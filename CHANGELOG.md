@@ -164,3 +164,10 @@ Useful endpoints for reference:
 - Wallet summary endpoint showing address, balance, and transaction count.
 ### Changed
 - Extended REST API to provide wallet-specific information.
+
+### Added
+- Block lookup API by block index.
+- Public key serialization for blockchain API responses.
+### Changed
+- Fixed /block endpoint JSON serialization.
+- Improved blockchain persistence compatibility with EC public keys.

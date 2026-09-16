@@ -1,11 +1,108 @@
 {
   "chain": [
     {
-      "hash": "00004d90e8358aa3df52aad8dd3ba303ca0a6daa67cf52ce45f3da7228431656",
+      "hash": "000008bdf4c0a76186e8e5fe90d241374a3308da84efb9daa54a4635d063ed14",
       "previousHash": "Mined Block",
       "data": "0",
-      "timeStamp": 1789222585644,
-      "nonce": 62501,
+      "timeStamp": 1789274230739,
+      "nonce": 191065,
       "transactions": [
         {
-          "transactionId": "REWARD-1789222585645"
+          "transactionId": "REWARD-1789274230740",
+          "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+          "value": 50.0,
+          "inputs": [],
+          "outputs": [
+            {
+              "id": "67efb432e0ee7b952579b0c36ef7ea26a8da07fb7e9c929d82cf7ac13716aaff",
+              "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+              "value": 50.0,
+              "parentTransactionId": "REWARD-1789274230740"
+            }
+          ]
+        }
+      ],
+      "merkleRoot": "REWARD-1789274230740"
+    },
+    {
+      "hash": "0000d6927e2af344d1181424306a051ac3ec47376ab59dca253e14994d0ded59",
+      "previousHash": "Mined Block",
+      "data": "000008bdf4c0a76186e8e5fe90d241374a3308da84efb9daa54a4635d063ed14",
+      "timeStamp": 1789580245696,
+      "nonce": 46927,
+      "transactions": [
+        {
+          "transactionId": "REWARD-1789580245697",
+          "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+          "value": 50.0,
+          "inputs": [],
+          "outputs": [
+            {
+              "id": "fedde4ffe968f03ac2531bb79fb0b19d76e9f9eef24bb5eb2b15bebeaffe6b70",
+              "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+              "value": 50.0,
+              "parentTransactionId": "REWARD-1789580245697"
+            }
+          ]
+        }
+      ],
+      "merkleRoot": "REWARD-1789580245697"
+    },
+    {
+      "hash": "0000bd18db58062fa6740a28da4f000b94799d5315dfe93ad1c829b8d8ab99ff",
+      "previousHash": "Mined Block",
+      "data": "0000d6927e2af344d1181424306a051ac3ec47376ab59dca253e14994d0ded59",
+      "timeStamp": 1789580287644,
+      "nonce": 50621,
+      "transactions": [
+        {
+          "transactionId": "REWARD-1789580287644",
+          "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+          "value": 50.0,
+          "inputs": [],
+          "outputs": [
+            {
+              "id": "3cf98a7ce895aee44315b41f7fc53a59979dda2b3b8186027ac06d313b2fb35a",
+              "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+              "value": 50.0,
+              "parentTransactionId": "REWARD-1789580287644"
+            }
+          ]
+        }
+      ],
+      "merkleRoot": "REWARD-1789580287644"
+    }
+  ],
+  "UTXOs": {
+    "67efb432e0ee7b952579b0c36ef7ea26a8da07fb7e9c929d82cf7ac13716aaff": {
+      "id": "67efb432e0ee7b952579b0c36ef7ea26a8da07fb7e9c929d82cf7ac13716aaff",
+      "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+      "value": 50.0,
+      "parentTransactionId": "REWARD-1789274230740"
+    },
+    "ed550cd488d02d8639260e56ea8f0a372630b0678570f6aa3a6b37af4d98126a": {
+      "id": "ed550cd488d02d8639260e56ea8f0a372630b0678570f6aa3a6b37af4d98126a",
+      "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+      "value": 100.0,
+      "parentTransactionId": "GENESIS"
+    },
+    "fedde4ffe968f03ac2531bb79fb0b19d76e9f9eef24bb5eb2b15bebeaffe6b70": {
+      "id": "fedde4ffe968f03ac2531bb79fb0b19d76e9f9eef24bb5eb2b15bebeaffe6b70",
+      "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+      "value": 50.0,
+      "parentTransactionId": "REWARD-1789580245697"
+    },
+    "3cf98a7ce895aee44315b41f7fc53a59979dda2b3b8186027ac06d313b2fb35a": {
+      "id": "3cf98a7ce895aee44315b41f7fc53a59979dda2b3b8186027ac06d313b2fb35a",
+      "recipient": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIe3mfqtLXOP8baeCBODso59j7dvc3DSfHNV+U1pLqpVeTVj00ZiPga4C/nNpSvPbHgwLCT2XSZD9rNJvdhrJzg\u003d\u003d",
+      "value": 50.0,
+      "parentTransactionId": "REWARD-1789580287644"
+    }
+  },
+  "minimumTransaction": 0.1,
+  "difficulty": 3,
+  "targetBlockTime": 5000,
+  "adjustmentInterval": 3,
+  "pendingTransactions": [],
+  "miningReward": 50.0
+}

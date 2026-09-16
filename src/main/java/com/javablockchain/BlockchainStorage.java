@@ -1,9 +1,13 @@
 package com.javablockchain;
 import com.google.gson.GsonBuilder;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.google.gson.*;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 public class BlockchainStorage {
 
@@ -14,9 +18,12 @@ public class BlockchainStorage {
         try (FileWriter writer = new FileWriter(FILE_NAME)) {
 
             GsonBuilder builder = new GsonBuilder()
-                    .setPrettyPrinting();
-
-            builder.create().toJson(blockchain, writer);
+        .setPrettyPrinting()
+        .registerTypeHierarchyAdapter(PublicKey.class,
+                (JsonSerializer<PublicKey>) (src, type, context) ->
+                        new JsonPrimitive(Base64.getEncoder().encodeToString(src.getEncoded())));
+                        
+                        builder.create().toJson(blockchain, writer);
 
             System.out.println("Blockchain saved.");
 
@@ -32,13 +39,21 @@ public class BlockchainStorage {
 
         try (FileReader reader = new FileReader(FILE_NAME)) {
 
-            GsonBuilder builder = new GsonBuilder();
-
-            Blockchain blockchain =
-                    builder.create().fromJson(
-                            reader,
-                            Blockchain.class
-                    );
+            GsonBuilder builder = new GsonBuilder()
+        .registerTypeHierarchyAdapter(PublicKey.class,
+                (JsonDeserializer<PublicKey>) (json, type, context) -> {
+                    try {
+                        byte[] keyBytes = Base64.getDecoder().decode(json.getAsString());
+                        X509EncodedKeySpec keySpec =
+                                new X509EncodedKeySpec(keyBytes);
+                        return KeyFactory.getInstance("EC")
+                                .generatePublic(keySpec);
+                    } catch (Exception e) {
+                        throw new JsonParseException(e);
+                    }
+                });
+                
+                Blockchain blockchain = builder.create().fromJson(reader, Blockchain.class);
 
             if (blockchain == null) {
                 return null;
